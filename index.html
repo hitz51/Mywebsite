@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Site Under Construction</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --bg-color: #f5f7fa;
+      --text-color: #333;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --icon-color: #ff8c42;
+      --link-bg: linear-gradient(135deg, #3a86ff, #8338ec);
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --text-muted: #444;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --card-bg: rgba(30, 30, 30, 0.95);
+      --icon-color: #ffb347;
+      --link-bg: linear-gradient(135deg, #6c5ce7, #00cec9);
+      --shadow-color: rgba(255, 255, 255, 0.1);
+      --text-muted: #aaa;
+    }
+
+    body.light {
+      --bg-color: #f5f7fa;
+      --text-color: #333;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --icon-color: #ff8c42;
+      --link-bg: linear-gradient(135deg, #3a86ff, #8338ec);
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --text-muted: #444;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 200, 124, 0.2) 0%, transparent 20%),
+        radial-gradient(circle at 90% 30%, rgba(124, 197, 255, 0.2) 0%, transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(255, 124, 195, 0.1) 0%, transparent 30%);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .construction-container {
+      text-align: center;
+      max-width: 800px;
+      width: 90%;
+      padding: 2rem;
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+    }
+
+    .construction-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        transparent 0deg 90deg,
+        rgba(255, 200, 124, 0.2) 90deg 180deg,
+        transparent 180deg 270deg,
+        rgba(124, 197, 255, 0.2) 270deg 360deg
+      );
+      animation: rotate 15s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+      color: var(--text-color);
+      position: relative;
+      display: inline-block;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff8c42, #ff3c83);
+      border-radius: 2px;
+    }
+
+    p {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin: 1.2rem 0;
+      color: var(--text-muted);
+    }
+
+    .construction-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: bounce 2s infinite;
+      color: var(--icon-color);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.3rem;
+      background: var(--link-bg);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
+    }
+
+    .contact-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(58, 134, 255, 0.4);
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-color);
+      transition: transform 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1.1rem;
+      }
+      .construction-icon {
+        font-size: 3rem;
+      }
+    }
+
+    .truck {
+      position: absolute;
+      bottom: -50px;
+      left: -100px;
+      font-size: 3rem;
+      animation: moveTruck 30s linear infinite;
+    }
+
+    @keyframes moveTruck {
+      0% { transform: translateX(-100px) rotateY(0deg); left: -100px; }
+      49% { transform: translateX(calc(100vw + 100px)) rotateY(0deg); }
+      50% { transform: translateX(calc(100vw + 100px)) rotateY(180deg); }
+      100% { transform: translateX(-100px) rotateY(180deg); left: -100px; }
+    }
+
+    .floating {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dark Mode Toggle -->
+  <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Main Content -->
+  <div class="construction-container">
+    <div class="construction-icon">🚧</div>
+    <h1>Coming Soon</h1>
+    <p>Our new site is on the way. Stay tuned!</p>
+
+    <div class="contact-links">
+      <a href="mailto:contact@hiteshramina.com" class="contact-link">
+        <i class="fas fa-envelope"></i> Email Us
+      </a>
+      <a href="https://www.linkedin.com/in/hitesh-ramina/" class="contact-link" target="_blank">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+    </div>
+  </div>
+
+  <div id="floatingElements"></div>
+  <div class="truck">🚛</div>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('themeToggle');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const storedTheme = localStorage.getItem('theme');
+
+      function applyTheme(theme) {
+        document.body.classList.remove('light', 'dark');
+        document.body.classList.add(theme);
+        toggleBtn.innerHTML = `<i class="fas fa-${theme === 'dark' ? 'sun' : 'moon'}"></i>`;
+        localStorage.setItem('theme', theme);
+      }
+
+      // Apply saved or preferred theme
+      if (storedTheme) {
+        applyTheme(storedTheme);
+      } else {
+        applyTheme(prefersDark ? 'dark' : 'light');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+        applyTheme(newTheme);
+      });
+
+      // Floating Elements
+      function createFloatingElements() {
+        const colors = ['rgba(58, 134, 255, 0.2)', 'rgba(255, 200, 124, 0.3)', 'rgba(255, 59, 130, 0.2)', 'rgba(154, 234, 152, 0.2)'];
+        const container = document.getElementById('floatingElements');
+
+        for (let i = 0; i < 15; i++) {
+          const element = document.createElement('div');
+          element.classList.add('floating');
+          const size = Math.random() * 40 + 10;
+          const posX = Math.random() * 100;
+          const posY = Math.random() * 100;
+          const delay = Math.random() * 5;
+          const duration = Math.random() * 15 + 10;
+          const color = colors[Math.floor(Math.random() * colors.length)];
+
+          element.style.width = `${size}px`;
+          element.style.height = `${size}px`;
+          element.style.left = `${posX}vw`;
+          element.style.top = `${posY}vh`;
+          element.style.background = color;
+          element.style.animation = `float${i} ${duration}s ease-in-out ${delay}s infinite alternate`;
+
+          document.styleSheets[0].insertRule(`
+            @keyframes float${i} {
+              0% { transform: translate(0, 0); }
+              50% { transform: translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 100}px); }
+              100% { transform: translate(0, 0); }
+            }
+          `, document.styleSheets[0].cssRules.length);
+
+          container.appendChild(element);
+        }
+      }
+
+      createFloatingElements();
+    });
+  </script>
+</body>
+</html>
