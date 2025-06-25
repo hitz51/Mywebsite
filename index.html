@@ -169,6 +169,7 @@
       cursor: pointer;
       color: var(--text-color);
       transition: transform 0.3s ease;
+      z-index: 2;
     }
 
     .theme-toggle:hover {
@@ -199,37 +200,16 @@
     }
 
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-      p {
-        font-size: 1.1rem;
-      }
-      .construction-icon {
-        font-size: 3rem;
-      }
-
+      h1 { font-size: 2rem; }
+      p { font-size: 1.1rem; }
+      .construction-icon { font-size: 3rem; }
       .construction-container::before,
       .floating,
       .truck,
-      .construction-icon {
-        animation: none !important;
-      }
-
-      .floating,
-      .truck {
-        display: none;
-      }
-
-      .construction-container,
-      .contact-link {
-        box-shadow: none;
-      }
-
-      .contact-link:hover {
-        transform: none;
-        box-shadow: none;
-      }
+      .construction-icon { animation: none !important; }
+      .floating, .truck { display: none; }
+      .construction-container, .contact-link { box-shadow: none; }
+      .contact-link:hover { transform: none; box-shadow: none; }
     }
   </style>
 </head>
@@ -265,12 +245,7 @@
       function applyTheme(theme) {
         document.body.classList.remove('light', 'dark');
         document.body.classList.add(theme);
-
-        const isMobile = window.innerWidth <= 768;
-        toggleBtn.innerHTML = isMobile
-          ? (theme === 'dark' ? '🌞' : '🌙')
-          : `<i class="fas fa-${theme === 'dark' ? 'sun' : 'moon'}"></i>`;
-
+        toggleBtn.innerHTML = `<i class="fas fa-${theme === 'dark' ? 'sun' : 'moon'}"></i>`;
         localStorage.setItem('theme', theme);
       }
 
