@@ -176,21 +176,6 @@
       transform: scale(1.1);
     }
 
-    .truck {
-      position: absolute;
-      bottom: -50px;
-      left: -100px;
-      font-size: 3rem;
-      animation: moveTruck 30s linear infinite;
-    }
-
-    @keyframes moveTruck {
-      0% { transform: translateX(-100px) rotateY(0deg); left: -100px; }
-      49% { transform: translateX(calc(100vw + 100px)) rotateY(0deg); }
-      50% { transform: translateX(calc(100vw + 100px)) rotateY(180deg); }
-      100% { transform: translateX(-100px) rotateY(180deg); left: -100px; }
-    }
-
     .floating {
       position: absolute;
       border-radius: 50%;
@@ -202,14 +187,18 @@
     @media (max-width: 768px) {
       h1 { font-size: 2rem; }
       p { font-size: 1.1rem; }
-      .construction-icon { font-size: 3rem; }
-      .construction-container::before,
-      .floating,
-      .truck,
-      .construction-icon { animation: none !important; }
-      .floating, .truck { display: none; }
-      .construction-container, .contact-link { box-shadow: none; }
-      .contact-link:hover { transform: none; box-shadow: none; }
+      .construction-icon { font-size: 3rem; animation: bounceMobile 3s infinite ease-in-out; }
+      .construction-container::before { animation: rotateMobile 30s linear infinite; }
+    }
+
+    @keyframes bounceMobile {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes rotateMobile {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -234,7 +223,6 @@
   </div>
 
   <div id="floatingElements"></div>
-  <div class="truck">🚛</div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -263,11 +251,13 @@
       function createFloatingElements() {
         const colors = ['rgba(58, 134, 255, 0.2)', 'rgba(255, 200, 124, 0.3)', 'rgba(255, 59, 130, 0.2)', 'rgba(154, 234, 152, 0.2)'];
         const container = document.getElementById('floatingElements');
+        const isMobile = window.innerWidth <= 768;
+        const elementCount = isMobile ? 5 : 15;
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < elementCount; i++) {
           const element = document.createElement('div');
           element.classList.add('floating');
-          const size = Math.random() * 40 + 10;
+          const size = Math.random() * 25 + 10;
           const posX = Math.random() * 100;
           const posY = Math.random() * 100;
           const delay = Math.random() * 5;
@@ -281,10 +271,13 @@
           element.style.background = color;
           element.style.animation = `float${i} ${duration}s ease-in-out ${delay}s infinite alternate`;
 
+          const moveX = (Math.random() - 0.5) * (isMobile ? 40 : 100);
+          const moveY = (Math.random() - 0.5) * (isMobile ? 25 : 60);
+
           document.styleSheets[0].insertRule(`
             @keyframes float${i} {
               0% { transform: translate(0, 0); }
-              50% { transform: translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 100}px); }
+              50% { transform: translate(${moveX}px, ${moveY}px); }
               100% { transform: translate(0, 0); }
             }
           `, document.styleSheets[0].cssRules.length);
@@ -293,9 +286,7 @@
         }
       }
 
-      if (window.innerWidth > 768) {
-        createFloatingElements();
-      }
+      createFloatingElements();
     });
   </script>
 </body>
