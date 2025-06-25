@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hitesh - Under Construction Site</title>
+  <title>Hitesh R</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -41,17 +41,15 @@
       --text-muted: #444;
     }
 
-    body {
+    html, body {
+      height: 100%;
+      width: 100%;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
       background-image:
         radial-gradient(circle at 10% 20%, rgba(255, 200, 124, 0.2) 0%, transparent 20%),
         radial-gradient(circle at 90% 30%, rgba(124, 197, 255, 0.2) 0%, transparent 25%),
@@ -59,10 +57,18 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
     .construction-container {
       text-align: center;
       max-width: 800px;
-      width: 90%;
+      width: 100%;
       padding: 2rem;
       background-color: var(--card-bg);
       border-radius: 20px;
@@ -143,6 +149,7 @@
     .contact-link {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
       padding: 0.7rem 1.3rem;
       background: var(--link-bg);
@@ -175,18 +182,6 @@
       transform: scale(1.1);
     }
 
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-      p {
-        font-size: 1.1rem;
-      }
-      .construction-icon {
-        font-size: 3rem;
-      }
-    }
-
     .truck {
       position: absolute;
       bottom: -50px;
@@ -208,6 +203,52 @@
       pointer-events: none;
       z-index: -1;
     }
+
+    /* 🎯 Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      .construction-container {
+        padding: 1.5rem 1rem;
+        width: 95%;
+        box-shadow: 0 6px 20px var(--shadow-color);
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        font-size: 1rem;
+        margin: 0.8rem 0;
+      }
+
+      .construction-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-top: 1.2rem;
+      }
+
+      .contact-link {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+        justify-content: center;
+      }
+
+      .theme-toggle {
+        top: 10px;
+        right: 10px;
+        font-size: 1.3rem;
+      }
+
+      .truck {
+        font-size: 2rem;
+        bottom: -30px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -217,19 +258,21 @@
     <i class="fas fa-moon"></i>
   </button>
 
-  <!-- Main Content -->
-  <div class="construction-container">
-    <div class="construction-icon">🚧</div>
-    <h1>Coming Soon</h1>
-    <p>Our new site is on the way. Stay tuned!</p>
+  <div class="page-wrapper">
+    <!-- Main Content -->
+    <div class="construction-container">
+      <div class="construction-icon">🚧</div>
+      <h1>Coming Soon</h1>
+      <p>Our new site is on the way. Stay tuned!</p>
 
-    <div class="contact-links">
-      <a href="mailto:contact@hiteshramina.com" class="contact-link">
-        <i class="fas fa-envelope"></i> Email Us
-      </a>
-      <a href="https://www.linkedin.com/in/hitesh-ramina/" class="contact-link" target="_blank">
-        <i class="fab fa-linkedin"></i> LinkedIn
-      </a>
+      <div class="contact-links">
+        <a href="mailto:contact@hiteshramina.com" class="contact-link">
+          <i class="fas fa-envelope"></i> Email Us
+        </a>
+        <a href="https://www.linkedin.com/in/hitesh-ramina/" class="contact-link" target="_blank">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+      </div>
     </div>
   </div>
 
@@ -250,7 +293,6 @@
         localStorage.setItem('theme', theme);
       }
 
-      // Apply saved or preferred theme
       if (storedTheme) {
         applyTheme(storedTheme);
       } else {
@@ -262,7 +304,6 @@
         applyTheme(newTheme);
       });
 
-      // Floating Elements
       function createFloatingElements() {
         const colors = ['rgba(58, 134, 255, 0.2)', 'rgba(255, 200, 124, 0.3)', 'rgba(255, 59, 130, 0.2)', 'rgba(154, 234, 152, 0.2)'];
         const container = document.getElementById('floatingElements');
